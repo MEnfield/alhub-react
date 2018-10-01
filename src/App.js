@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { IntlProvider } from 'react-intl'
 import { Route } from "react-router-dom";
 import Loader from 'react-loader';
 import HomePage from "./components/pages/HomePage";
@@ -23,43 +24,50 @@ class App extends React.Component {
   render(){
     const { location, isAuthenticated, loaded } = this.props
     return(
-      <div>
-        <Loader loaded={loaded}>
-          {isAuthenticated && <TopNavigation />}
-          <Route location={location} path="/" exact component={HomePage} />
-          <Route
-            location={location}
-            path="/confirmation/:token"
-            exact
-            component={ConfirmationPage}
-          />
-          <GuestRoute location={location} path="/login" exact component={LoginPage} />
-          <GuestRoute
-            location={location}
-            path="/signup"
-            exact
-            component={SignupPage}
-          />
-          <GuestRoute
-            location={location}
-            path="/forgot_password"
-            exact
-            component={ForgotPasswordPage}
-          />
-          <GuestRoute
-            location={location}
-            path="/reset_password/:token"
-            exact
-            component={ResetPasswordPage}
-          />
-          <UserRoute
-            location={location}
-            path="/dashboard"
-            exact
-            component={DashboardPage}
-          />
-        </Loader>
-      </div>
+      <IntlProvider
+        locale="ru"
+        messages={{
+          "nav.dashboard": "Dashboard - Russian"
+        }}
+      >
+        <div>
+          <Loader loaded={loaded}>
+            {isAuthenticated && <TopNavigation />}
+            <Route location={location} path="/" exact component={HomePage} />
+            <Route
+              location={location}
+              path="/confirmation/:token"
+              exact
+              component={ConfirmationPage}
+            />
+            <GuestRoute location={location} path="/login" exact component={LoginPage} />
+            <GuestRoute
+              location={location}
+              path="/signup"
+              exact
+              component={SignupPage}
+            />
+            <GuestRoute
+              location={location}
+              path="/forgot_password"
+              exact
+              component={ForgotPasswordPage}
+            />
+            <GuestRoute
+              location={location}
+              path="/reset_password/:token"
+              exact
+              component={ResetPasswordPage}
+            />
+            <UserRoute
+              location={location}
+              path="/dashboard"
+              exact
+              component={DashboardPage}
+            />
+          </Loader>
+        </div>
+      </IntlProvider>
     )
   }
 }

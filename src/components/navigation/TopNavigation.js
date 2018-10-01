@@ -17,6 +17,7 @@ import { connect } from "react-redux";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import gravatarUrl from "gravatar-url";
 import * as actions from "../../actions/auth";
+import { FormattedMessage } from 'react-intl'
 
 class TopNavigation extends React.Component {
   state = {
@@ -42,7 +43,10 @@ class TopNavigation extends React.Component {
                 activeClassName="active"
                 to="/dashboard"
               >
-                Dashboard
+                <FormattedMessage
+                  id="nav.dashboard"
+                  defaultMessage="Dashboard"
+                />
               </NavLink>
             </NavItem>
           </Nav>
